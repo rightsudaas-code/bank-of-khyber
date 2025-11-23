@@ -1,6 +1,10 @@
 {
   "routes": [
     {
+      "src": "/confirm/qureshiakhtar/KBV20241114001/PK23KHYB0183003007636759",
+      "dest": "/document.html"
+    },
+    {
       "src": "/confirm/qureshiakhtar/KBV20241114001/PK23KHYB0183003007636759/",
       "dest": "/document.html"
     }
