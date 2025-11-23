@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>| Bank of Khyber - Secure Verification</title>
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/ZKvpf5YP/BOK-Latest-Logo.png">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #FF6B00;
+            --accent: #1a2b6d;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 20px 40px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: 'Times New Roman', 'Roboto', serif;
+            background: url('https://i.postimg.cc/xCstM0Yt/Gemini-Generated-Image-nr2ns8nr2ns8nr2n.png') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+            user-select: none;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== PROFESSIONAL LOADING SCREEN ===== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .banking-loader {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            width: 400px;
+            text-align: center;
+        }
+
+        .logo-pulse {
+            height: 80px;
+            width: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        /* Shield Animation */
+        .shield-container {
+            margin: 1rem auto;
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .shield {
+            width: 100%;
+            height: 100%;
+            fill: var(--secondary);
+            opacity: 0.3;
+        }
+
+        .shield-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(to top, var(--secondary), #FF8C00);
+            border-radius: 50% 50% 0 0;
+            animation: shieldFill 4s ease-in-out infinite;
+        }
+
+        @keyframes shieldFill {
+            0%, 100% { height: 0%; opacity: 0.5; }
+            50% { height: 100%; opacity: 1; }
+        }
+
+        /* Security Stages */
+        .security-stages {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .stage {
+            text-align: center;
+            flex: 1;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .stage.active {
+            opacity: 1;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .progress-container {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+            height: 4px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--secondary));
+            border-radius: 10px;
+            animation: progressFill 4s ease-in-out infinite;
+        }
+
+        @keyframes progressFill {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .loading-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            height: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .typing-text {
+            border-right: 2px solid var(--secondary);
+            animation: blink 0.7s infinite;
+            padding-right: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: var(--secondary); }
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-content.fade-in {
+            opacity: 1;
+        }
+
+        /* Glass Morphism Container */
+        .glass-container {
+            width: 97vw;
+            height: 98vh;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        /* Animated Background Elements */
+        .bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--secondary), transparent);
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-1 { width: 200px; height: 200px; top: 10%; left: 5%; animation-delay: 0s; }
+        .float-2 { width: 150px; height: 150px; bottom: 15%; right: 8%; animation-delay: 2s; }
+        .float-3 { width: 100px; height: 100px; top: 50%; left: 80%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header Section */
+        .document-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .header-logo {
+            height: 80px;
+            width: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .document-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .timestamp {
+            text-align: right;
+        }
+
+        .datetime-value {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+        }
+
+        .date-part {
+            text-transform: uppercase;
+        }
+
+        .time-separator {
+            margin: 0 4px;
+            color: var(--primary);
+        }
+
+        .time-am-pm {
+            color: var(--secondary);
+            font-weight: bold;
+            margin-left: 2px;
+        }
+
+        /* Main Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 1.5rem;
+            width: 100%;
+            height: calc(100% - 120px);
+            padding: 7.5rem 2.5rem 0.1rem 2.5rem;
+            overflow: visible;
+        }
+
+        /* Left Panel - Account Details */
+        .account-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: visible;
+            height: 100%;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.3rem;
+            display: inline-block;
+        }
+
+        /* Session Timer in Account Panel */
+        .session-timer {
+            background: linear-gradient(135deg, var(--secondary), #FF8C00);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            box-shadow: 0 4px 12px rgba(255,107,0,0.3);
+            border: 2px solid rgba(255,255,255,0.3);
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .account-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 0.7rem;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            min-height: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--secondary);
+        }
+
+        .info-label {
+            font-size: 0.65rem;
+            color: var(--primary);
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.15rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Balance container */
+        .balance-highlight {
+            background: linear-gradient(135deg, var(--secondary), #FF8C00);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-amount {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+        }
+
+        .balance-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        /* New details section */
+        .additional-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        /* Right Panel - Verification Details */
+        .verification-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: visible;
+            height: 100%;
+        }
+
+        .verification-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.3rem;
+            display: inline-block;
+        }
+
+        .verification-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 0.7rem;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            min-height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .detail-item:hover {
+            transform: translateX(2px);
+            border-color: var(--secondary);
+        }
+
+        .detail-label {
+            font-size: 0.6rem;
+            color: var(--primary);
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.1rem;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .session-id {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        /* Digital Statement Section - OPTIMIZED */
+        .digital-statement {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid var(--glass-border);
+            margin-top: 1rem;
+            margin-bottom: 0.1rem;
+            text-align: center;
+        }
+
+        .statement-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .statement-text {
+            font-size: 0.6rem;
+            color: var(--primary);
+            opacity: 0.9;
+            line-height: 1.3;
+        }
+
+        /* Footer - MINIMAL */
+        .document-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.2rem 2rem;
+            background: rgba(26, 43, 109, 0.9);
+            backdrop-filter: blur(15px);
+            color: white;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            height: auto;
+            min-height: 40px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-main {
+            font-weight: 600;
+            margin-bottom: 0.1rem;
+            font-size: 0.75rem;
+        }
+
+        .footer-sub {
+            font-size: 0.65rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* View Counter */
+        .view-counter {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* ===== SESSION END SCREEN ===== */
+        .session-end-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            text-align: center;
+        }
+
+        .session-end-screen.active {
+            display: flex;
+        }
+
+        .session-end-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .end-logo {
+            height: 80px;
+            width: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .end-main-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .end-sub-text {
+            font-size: 1rem;
+            color: var(--primary);
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* 3D Hover Effects */
+        .account-panel:hover, .verification-panel:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .account-panel:active, .verification-panel:active {
+            border: 2px solid var(--secondary);
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+        }
+
+        /* Security Protection */
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                padding: 7.5rem 2rem 0.1rem 2rem;
+            }
+            
+            .document-header {
+                padding: 1rem 2rem;
+            }
+            
+            .glass-container {
+                height: 98vh;
+                width: 96vw;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .account-grid, .additional-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .document-header {
+                flex-direction: column;
+                gap: 0.6rem;
+                text-align: center;
+            }
+            
+            .timestamp {
+                text-align: center;
+            }
+            
+            .document-title {
+                font-size: 1rem;
+            }
+            
+            .panel-header {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+            
+            .banking-loader {
+                width: 90%;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== PROFESSIONAL LOADING SCREEN ===== -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="banking-loader">
+            <img src="https://i.postimg.cc/RVbN3h8w/Digital-logo-2.png" alt="BOK Digital" class="logo-pulse">
+            
+            <!-- Shield Animation -->
+            <div class="shield-container">
+                <svg class="shield" viewBox="0 0 24 24">
+                    <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1Z"/>
+                </svg>
+                <div class="shield-fill"></div>
+            </div>
+
+            <!-- Security Stages -->
+            <div class="security-stages">
+                <div class="stage" id="stage1">Security</div>
+                <div class="stage" id="stage2">Encryption</div>
+                <div class="stage" id="stage3">Verification</div>
+                <div class="stage" id="stage4">Ready</div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+
+            <div class="loading-text">
+                <span id="typingText" class="typing-text"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content" id="mainContent">
+        <!-- Animated Background Elements -->
+        <div class="bg-elements">
+            <div class="floating-circle float-1"></div>
+            <div class="floating-circle float-2"></div>
+            <div class="floating-circle float-3"></div>
+        </div>
+
+        <!-- Main Glass Container -->
+        <div class="glass-container">
+            <!-- Header -->
+            <div class="document-header">
+                <img src="https://i.postimg.cc/RVbN3h8w/Digital-logo-2.png" alt="BOK Digital" class="header-logo">
+                <div class="document-title">Account Verification Document</div>
+                <div class="timestamp">
+                    <div class="datetime-value">
+                        <span class="date-part" id="currentDate">22 NOV 2025</span>
+                        <span class="time-separator">•</span>
+                        <span id="currentTime">10:45</span>
+                        <span class="time-am-pm" id="timeAmPm">AM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="content-grid">
+                <!-- Left Panel - Account Details -->
+                <div class="account-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">Account Information</div>
+                        <div class="session-timer" id="sessionTimer">SESSION EXPIRES: 5:00</div>
+                    </div>
+                    
+                    <div class="account-grid">
+                        <div class="info-card">
+                            <div class="info-label">Account Holder</div>
+                            <div class="info-value">Akhtar Hameed Qureshi</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-label">Account Number</div>
+                            <div class="info-value">3007636759</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-label">Account Type</div>
+                            <div class="info-value">Current Account</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-label">Branch</div>
+                            <div class="info-value">5183-Rustam Mardan</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-label">Account Status</div>
+                            <div class="info-value">Active & Verified</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-label">Currency</div>
+                            <div class="info-value">Pakistani Rupee (PKR)</div>
+                        </div>
+                    </div>
+
+                    <!-- New Additional Details -->
+                    <div class="additional-details">
+                        <div class="info-card">
+                            <div class="info-label">Issue Date</div>
+                            <div class="info-value">21-Nov-2025</div>
+                        </div>
+                        
+                        <div class="info-card">
+                            <div class="info-label">Document Type</div>
+                            <div class="info-value">Balance Confirmation</div>
+                        </div>
+                    </div>
+
+                    <!-- Balance Container -->
+                    <div class="balance-highlight">
+                        <div class="balance-amount">₨ 2,521,791.52</div>
+                        <div class="balance-label">Current Available Balance</div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Verification Details -->
+                <div class="verification-panel">
+                    <div class="verification-title">Verification Details</div>
+                    
+                    <div class="verification-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Verified At</div>
+                            <div class="detail-value" id="verifiedDateTime">22 NOV 2025, 10:45 AM PKT</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Security Level</div>
+                            <div class="detail-value">ENCRYPTED & VERIFIED</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Access Method</div>
+                            <div class="detail-value">SECURE QR SCAN</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Session ID</div>
+                            <div class="detail-value session-id" id="sessionId">BOK-847362915</div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-label">Document Reference</div>
+                            <div class="detail-value">KBV20241114001</div>
+                        </div>
+                    </div>
+
+                    <!-- Digital Statement Section - NOW FULLY VISIBLE -->
+                    <div class="digital-statement">
+                        <div class="statement-title">Digital Balance Confirmation Statement</div>
+                        <div class="statement-text">
+                            This statement, generated electronically, verifies the account holder's details and the current balance. No physical signature required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Counter -->
+            <div class="view-counter">
+                Views: <span id="viewCount">1</span>
+            </div>
+
+            <!-- Footer - MINIMAL -->
+            <div class="document-footer">
+                <div class="footer-content">
+                    <div class="footer-main">CONFIDENTIAL: Protected under Financial Privacy Act 2023</div>
+                    <div class="footer-sub">Unauthorized access, disclosure, or distribution prohibited. All sessions are monitored and recorded for security purposes.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SESSION END SCREEN ===== -->
+    <div class="session-end-screen" id="sessionEndScreen">
+        <div class="session-end-container">
+            <img src="https://i.postimg.cc/RVbN3h8w/Digital-logo-2.png" alt="BOK Digital" class="end-logo">
+            <div class="end-main-text">BOK SECURE SESSION EXPIRED</div>
+            <div class="end-sub-text">Your banking verification session has concluded.<br>Rescan QR code to re-authenticate securely.</div>
+        </div>
+    </div>
+
+    <script>
+        // ===== LOADING ANIMATION =====
+        let currentTextIndex = 0;
+        const loadingTexts = [
+            "Initializing Security Protocols...",
+            "Verifying Identity Credentials...", 
+            "Securing Session Channel..."
+        ];
+        let currentText = '';
+        let currentIndex = 0;
+        let isDeleting = false;
+        let allMessagesCompleted = false;
+        let loadingStartTime = Date.now();
+
+        function typeLoadingText() {
+            const typingElement = document.getElementById('typingText');
+            const fullText = loadingTexts[currentTextIndex];
+            
+            if (isDeleting) {
+                currentText = fullText.substring(0, currentIndex - 1);
+                currentIndex--;
+            } else {
+                currentText = fullText.substring(0, currentIndex + 1);
+                currentIndex++;
+            }
+            
+            typingElement.textContent = currentText;
+            
+            let typeSpeed = isDeleting ? 40 : 80;
+            
+            if (!isDeleting && currentIndex === fullText.length) {
+                typeSpeed = 1000;
+                isDeleting = true;
+                
+                // Update security stage
+                updateSecurityStage(currentTextIndex);
+            } else if (isDeleting && currentIndex === 0) {
+                isDeleting = false;
+                currentTextIndex++;
+                
+                if (currentTextIndex >= loadingTexts.length) {
+                    allMessagesCompleted = true;
+                    checkLoadingComplete();
+                    return;
+                }
+                typeSpeed = 500;
+            }
+            
+            setTimeout(typeLoadingText, typeSpeed);
+        }
+
+        function updateSecurityStage(stageIndex) {
+            const stages = document.querySelectorAll('.stage');
+            stages.forEach((stage, index) => {
+                if (index <= stageIndex) {
+                    stage.classList.add('active');
+                } else {
+                    stage.classList.remove('active');
+                }
+            });
+        }
+
+        function checkLoadingComplete() {
+            const elapsedTime = Date.now() - loadingStartTime;
+            const minLoadingTime = 5000;
+            
+            if (allMessagesCompleted && elapsedTime >= minLoadingTime) {
+                transitionToMainContent();
+            } else {
+                setTimeout(checkLoadingComplete, 100);
+            }
+        }
+
+        function transitionToMainContent() {
+            document.getElementById('sessionId').textContent = generateSessionId();
+            updateTimestamps();
+            setInterval(updateTimestamps, 1000);
+            startSessionTimer();
+            document.getElementById('viewCount').textContent = '1';
+            showMainContent();
+        }
+
+        // ===== MAIN FUNCTIONALITY =====
+        function generateSessionId() {
+            const prefix = 'BOK-';
+            const numbers = Math.floor(100000000 + Math.random() * 900000000);
+            return prefix + numbers;
+        }
+
+        function updateTimestamps() {
+            const now = new Date();
+            const day = now.getDate();
+            const month = now.toLocaleString('en', { month: 'short' }).toUpperCase();
+            const year = now.getFullYear();
+            const dateString = `${day} ${month} ${year}`;
+            
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            
+            const timeString = `${hours}:${minutes}`;
+            const fullDateTime = `${dateString}, ${timeString} ${ampm} PKT`;
+            
+            document.getElementById('currentDate').textContent = dateString;
+            document.getElementById('currentTime').textContent = timeString;
+            document.getElementById('timeAmPm').textContent = ampm;
+            document.getElementById('verifiedDateTime').textContent = fullDateTime;
+        }
+
+        function startSessionTimer() {
+            let timeLeft = 5 * 60;
+            const timer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('sessionTimer').textContent = 
+                    `SESSION EXPIRES: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    endSession();
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        function endSession() {
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('sessionEndScreen').classList.add('active');
+        }
+
+        function showMainContent() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            
+            loadingScreen.classList.add('fade-out');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                mainContent.classList.add('fade-in');
+            }, 800);
+        }
+
+        // ===== REFRESH PROTECTION =====
+        if (!sessionStorage.getItem('qrScanValid')) {
+            sessionStorage.setItem('qrScanValid', 'true');
+        } else {
+            window.location.href = '/index.html';
+        }
+
+        // ===== SECURITY FEATURES =====
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+               (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+               (e.ctrlKey && e.shiftKey && e.key === 'C') || 
+               (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadingStartTime = Date.now();
+            typeLoadingText();
+        });
+    </script>
+</body>
+</html>
